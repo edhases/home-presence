@@ -21,7 +21,7 @@ type HomePresenceConfigEntry = ConfigEntry[HomePresenceCoordinator]
 
 async def async_setup_entry(
     hass: HomeAssistant, entry: HomePresenceConfigEntry
-) -> None:
+) -> bool:
     """Set up Home Presence from a config entry."""
     try:
         config = build_config(entry)
@@ -52,6 +52,7 @@ async def async_setup_entry(
 
     entry.runtime_data = coordinator
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
+    return True
 
 
 async def async_unload_entry(
