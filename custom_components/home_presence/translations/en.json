@@ -1,0 +1,81 @@
+{
+  "title": "Home Presence",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Home Presence",
+        "description": "Home Presence decides who is home by combining an nmap MAC scan with existing device_tracker entities.\n\nDescribe one person per line as `Name = device, device, ...`, where a device is a MAC address or a `device_tracker` entity ID.",
+        "data": {
+          "subnet": "Networks to scan",
+          "scan_options": "nmap options",
+          "scan_interval": "Scan interval (seconds)",
+          "consider_home": "Keep devices home for (minutes)",
+          "people": "People"
+        },
+        "data_description": {
+          "subnet": "Comma separated list of IPv4 networks in CIDR notation, for example 192.168.1.0/24.",
+          "scan_options": "Extra arguments passed to nmap. The `-oX -` output option is added automatically.",
+          "scan_interval": "How often the network is scanned. Between 10 and 600 seconds.",
+          "consider_home": "A device stays marked as home for this many minutes after it was last seen by the scan. Between 1 and 240 minutes.",
+          "people": "One line per person: `Name = device, device, ...`. A device is a MAC address (optionally prefixed with `mac:`), `ip:192.168.1.197`, `host:Redmi-Note-14` or a `device_tracker` entity (optionally prefixed with `entity:`). Lines starting with # are ignored.\n\nCopy a MAC address (or hostname) from the devices below:\n\n```\n{devices}\n```"
+        }
+      }
+    },
+    "error": {
+      "invalid_people": "Could not parse this line: {line}. Expected `Name = device, device`.",
+      "no_people": "Add at least one person, one per line.",
+      "invalid_subnet": "Enter a valid IPv4 network in CIDR notation, for example 192.168.1.0/24.",
+      "invalid_scan_options": "The nmap options cannot be empty.",
+      "invalid_scan_interval": "The scan interval must be between 10 and 600 seconds.",
+      "invalid_consider_home": "The keep-home time must be between 1 and 240 minutes."
+    },
+    "abort": {
+      "already_configured": "Home Presence is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Home Presence options",
+        "description": "Describe one person per line as `Name = device, device, ...`, where a device is a MAC address or a `device_tracker` entity ID.",
+        "data": {
+          "subnet": "Networks to scan",
+          "scan_options": "nmap options",
+          "scan_interval": "Scan interval (seconds)",
+          "consider_home": "Keep devices home for (minutes)",
+          "people": "People"
+        },
+        "data_description": {
+          "subnet": "Comma separated list of IPv4 networks in CIDR notation, for example 192.168.1.0/24.",
+          "scan_options": "Extra arguments passed to nmap. The `-oX -` output option is added automatically.",
+          "scan_interval": "How often the network is scanned. Between 10 and 600 seconds.",
+          "consider_home": "A device stays marked as home for this many minutes after it was last seen by the scan. Between 1 and 240 minutes.",
+          "people": "One line per person: `Name = device, device, ...`. A device is a MAC address (optionally prefixed with `mac:`), `ip:192.168.1.197`, `host:Redmi-Note-14` or a `device_tracker` entity (optionally prefixed with `entity:`). Lines starting with # are ignored.\n\nCopy a MAC address (or hostname) from the devices below:\n\n```\n{devices}\n```"
+        }
+      }
+    },
+    "error": {
+      "invalid_people": "Could not parse this line: {line}. Expected `Name = device, device`.",
+      "no_people": "Add at least one person, one per line.",
+      "invalid_subnet": "Enter a valid IPv4 network in CIDR notation, for example 192.168.1.0/24.",
+      "invalid_scan_options": "The nmap options cannot be empty.",
+      "invalid_scan_interval": "The scan interval must be between 10 and 600 seconds.",
+      "invalid_consider_home": "The keep-home time must be between 1 and 240 minutes."
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "person_home": {
+        "name": "{person} Home"
+      },
+      "anyone_home": {
+        "name": "Anyone home"
+      }
+    },
+    "sensor": {
+      "people_home": {
+        "name": "People home"
+      }
+    }
+  }
+}

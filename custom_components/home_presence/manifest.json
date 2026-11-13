@@ -1,0 +1,11 @@
+{
+  "domain": "home_presence",
+  "name": "Home Presence",
+  "codeowners": ["@edhases"],
+  "config_flow": true,
+  "documentation": "https://github.com/edhases/home-presence",
+  "integration_type": "service",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/edhases/home-presence",
+  "version": "0.1.0"
+}
